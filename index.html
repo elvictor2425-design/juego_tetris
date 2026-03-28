@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TETRIS 2026</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Orbitron -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Vinculación del CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game-wrapper" class="container-fluid">
+    <div class="row g-4 align-items-start">
+        <!-- Área de Juego -->
+        <div class="col-auto">
+            <div class="position-relative">
+                <canvas id="tetris" width="300" height="500"></canvas>
+
+                <div id="overlay">
+                    <h1 class="neon-title">TETRIS 2026</h1>
+                    <div class="config-group">
+                        <label class="form-label">DIFICULTAD: <span id="speedVal">5</span></label>
+                        <input type="range" class="form-range" id="speedRange" min="1" max="10" value="5">
+
+                        <label class="form-label mt-3">SISTEMA VISUAL</label>
+                        <select id="paletteSelect" class="form-select form-select-sm">
+                            <option value="neon">NEÓN TOKYO</option>
+                            <option value="sunset">ATARDECER CYBER</option>
+                            <option value="ocean">OCÉANO PROFUNDO</option>
+                            <option value="candy">CARAMELO NEÓN</option>
+                            <option value="retro">RETRO ARCADE</option>
+                            <option value="matrix">MATRIX GREEN</option>
+                        </select>
+                    </div>
+                    <button id="start-btn" class="btn btn-outline-info btn-lg px-5">INICIAR SESIÓN</button>
+                    <div id="game-over-info" class="mt-4 d-none">
+                        <h4 class="text-danger">CONEXIÓN PERDIDA</h4>
+                        <p class="mb-0">PUNTAJE: <span id="final-score">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Lateral (HUD) -->
+        <div class="col">
+            <div class="hud-panel">
+                <div class="stat-label"><i class="fas fa-microchip me-2"></i>Puntaje</div>
+                <div id="score" class="stat-value">0</div>
+
+                <div class="stat-label"><i class="fas fa-hourglass-half me-2"></i>Tiempo</div>
+                <div id="timer" class="stat-value">02:00</div>
+
+                <div class="stat-label"><i class="fas fa-layer-group me-2"></i>Siguiente</div>
+                <canvas id="next-canvas" width="100" height="100"></canvas>
+
+                <div class="stat-label"><i class="fas fa-keyboard me-2"></i>Controles</div>
+                <div class="small text-muted mb-4" style="font-size: 0.6rem;">
+                    FLECHAS: MOVER<br>Z/X: ROTAR<br>ESPACIO: CAÍDA RÁPIDA
+                </div>
+
+                <!-- Botones Táctiles -->
+                <div class="mobile-controls">
+                    <button class="ctrl-btn" onpointerdown="handleMove(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="ctrl-btn" onpointerdown="handleRotate(1)"><i class="fas fa-redo"></i></button>
+                    <button class="ctrl-btn" onpointerdown="handleMove(1)"><i class="fas fa-chevron-right"></i></button>
+                    <button class="ctrl-btn" onpointerdown="handleRotate(-1)">Z</button>
+                    <button class="ctrl-btn" onpointerdown="handleDrop()"><i class="fas fa-chevron-down"></i></button>
+                    <button class="ctrl-btn" onpointerdown="handleHardDrop()"><i class="fas fa-angle-double-down"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vinculación del JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
